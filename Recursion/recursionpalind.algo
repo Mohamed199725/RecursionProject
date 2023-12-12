@@ -1,37 +1,36 @@
-FUNCTION IsPalindromeWord(word: STRING): boolean;
-VAR
-    left, right: INTEGER;
+FUNCTION IsPalindromeWord(word: STRING; left,right:INTEGER): boolean;
+
 BEGIN
   // Initialize pointers
-    left := 1;
-    right := Length(word);
+   
 
   // Compare characters from both ends
-    WHILE (left < right) DO
+    WHILE (left <= right) DO
   
     // If characters are different, it's not a palindrome
         IF (word[left] <> word[right]) THEN
    
-            IsPalindromeWord := false;
+            RETURN false;
             // Move pointers towards the center
             END_IF
-            left := left + 1;
-            right:= right - 1;
+         IsPalindromeWord(word,left+1, right-1);
     END_WHILE
      // If the loop completes, it's a palindrome
-    IsPalindromeWord := true;
+    RETURN true;
 END    
   
 
 ALGORITHM IsPalindrome 
 VAR
     inputWord: STRING;
+     left:INTEGER := 0;
+    right:INTEGER := inputWord.Length;
 BEGIN
     // Read input from the user
     WRITE("Enter a word: ");
     READ(inputWord);
     // Check if the input word is a palindrome
-    IF (IsPalindromeWord(inputWord)) THEN
+    IF (IsPalindromeWord(inputWord,left,right)) THEN
         WRITE(inputWord, " is a palindrome.");
     ELSE
         WRITE(inputWord, " is not a palindrome.");
